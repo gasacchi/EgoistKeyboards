@@ -1,0 +1,128 @@
+;;                   Egoist Keyboard layout
+;;                           18 Keys
+;;                         ISO Version
+
+
+(defcfg
+  ;; linux only
+  linux-dev /dev/input/by-id/usb-SEM_USB_Keyboard-event-kbd)
+
+(defsrc
+          w       e                                               o       p
+  a       s       d       f                               k       l       ;       '
+                          c                               ,
+                          
+                          lalt     spc           ralt     cmps)
+
+;; Adaptive key sequences
+(defseq
+  ;; Left side
+  ue (e a)
+  eu (a e)
+  oa (u o)
+  ao (o u)
+  
+)
+
+(deffakekeys
+  ;; Left
+  ue (macro u e)
+  eu (macro e u)
+  oa (macro o a)
+  ao (macro a o)
+)
+
+
+(defalias
+  lmod   (tap-hold 100 200 spc
+                           (layer-while-held number))
+  rmod   (tap-hold 100 200 (layer-switch alpha-2)
+                           (layer-while-held symbol-1))
+  rmod0  (tap-hold 100 200 sldr
+                           (layer-while-held symbol-2))
+   
+  h      (tap-hold 100 200 h (layer-while-held control))
+ 
+  
+  
+  , (multi (macro ,) (layer-switch alpha-1))
+  . (multi (macro .) (layer-switch alpha-1))
+  q (multi (macro q) (layer-switch alpha-1))
+  b (tap-dance 200 
+               ((multi b (layer-switch alpha-1))
+                (multi (macro b b) (layer-switch alpha-1))))
+  p (tap-dance 200 
+               ((multi p (layer-switch alpha-1))
+                (multi (macro p p) (layer-switch alpha-1))))
+  z (tap-dance 200 
+               ((multi z           (layer-switch alpha-1))
+                (multi (macro z z) (layer-switch alpha-1))))
+  x (tap-dance 200 
+               ((multi x (layer-switch alpha-1))
+                (multi (macro x x) (layer-switch alpha-1))))
+  
+  f (tap-dance 200 
+               ((multi f           (layer-switch alpha-1))
+                (multi (macro f f) (layer-switch alpha-1))))
+  k (multi (macro k) (layer-switch alpha-1))
+  w (multi (macro w) (layer-switch alpha-1))
+  m (tap-dance 200 
+               ((multi m           (layer-switch alpha-1))
+                (multi (macro m m) (layer-switch alpha-1))))
+  g (tap-dance 200 
+               ((multi g           (layer-switch alpha-1))
+                (multi (macro g g) (layer-switch alpha-1))))
+  v (multi (macro v) (layer-switch alpha-1))
+  j (multi (macro j) (layer-switch alpha-1))
+)
+
+(deflayer alpha-1
+          u       o                                                d       l
+  i       e       a       @h                               s       t       r      n
+                          y                                c
+                          
+                          lalt     @lmod        @rmod     @rmod0 
+)
+
+(deflayer alpha-2
+          @,      @.                                              @k      @j
+  @q      @z      @x      @p                              @g      @m      @v       @b
+                          @f                              @w
+                          lalt     spc           _        _ 
+)
+
+(deflayer number
+          u       o                                                d       l
+  a       i       e       @h                               s       t       r      n
+                          y                                c
+                          
+                          lalt     spc           _        _ 
+)
+
+(deflayer symbol-1
+          u       o                                                d       l
+  a       i       e       @h                               s       t       r      n
+                          y                                c
+    
+                          lalt     spc           _         _ 
+)
+
+(deflayer symbol-2
+          u       o                                                d       l
+  a       i       e       @h                               s       t       r      n
+                          y                                c
+    
+                          lalt     spc           _         _ 
+)
+
+
+(deflayer control
+          _       _                                               C-c     C-v
+  _       C-S-z   C-z     _                               tab     bspc    C-bspc   ret
+                          _                               C-x
+                          
+                          lalt     spc           _        _ 
+)
+
+
+
